@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.json.simple.JSONObject;
+
 import com.learn.mipush.bean.PushBean;
 
 
@@ -64,11 +67,12 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param regId
 	 * @param deviceType
 	 * @throws Exception
 	 */
-	private Result sendMessage(String title, String content, String regId, int deviceType, long timeToSend) throws Exception {
+	private Result sendMessage(String title, String content, JSONObject jsonObjectPayload,  String regId, int deviceType, long timeToSend) throws Exception {
 		reStartPush(deviceType);
 		Sender sender = null;
 		if (deviceType == TYPE_ANDROID) {
@@ -76,7 +80,7 @@ public class MiPushUtils {
 		} else if (deviceType == TYPE_IOS) {
 			sender = new Sender(IOS_APP_SECRET); // 需要根据appSecert来发送
 		}
-		Message message = buildMessage(title, content, deviceType, timeToSend);
+		Message message = buildMessage(title, content,  jsonObjectPayload, deviceType, timeToSend);
 		Result result = sender.send(message, regId, (int) timeToSend); // 根据regID，发送消息到指定设备上，不重试。
 		return result;
 	}
@@ -86,11 +90,12 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param userMobile
 	 * @param deviceType
 	 * @throws Exception
 	 */
-	private Result sendMessageToAlias(String title, String content, String userMobile, int deviceType)
+	private Result sendMessageToAlias(String title, String content, JSONObject jsonObjectPayload,  String userMobile, int deviceType)
 			throws Exception {
 		reStartPush(deviceType);
 		Sender sender = null;
@@ -99,7 +104,7 @@ public class MiPushUtils {
 		} else if (deviceType == TYPE_IOS) {
 			sender = new Sender(IOS_APP_SECRET); // 需要根据appSecert来发送
 		}
-		Result result = sender.sendToAlias(buildMessage(title, content, deviceType, 0), userMobile, 0); // 根据alias，发送消息到指定设备上，不重试。
+		Result result = sender.sendToAlias(buildMessage(title, content, jsonObjectPayload, deviceType, 0), userMobile, 0); // 根据alias，发送消息到指定设备上，不重试。
 		return result;
 	}
 	
@@ -110,11 +115,12 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param deviceType
 	 * @param timeToSend
 	 * @throws Exception
 	 */
-	public Result sendBroadcastAll(String title, String content, int deviceType,  int timeToSend) throws Exception {
+	public Result sendBroadcastAll(String title, String content, JSONObject jsonObjectPayload, int deviceType,  int timeToSend) throws Exception {
 		reStartPush(deviceType);
 		Sender sender = null;
 		if (deviceType == TYPE_ANDROID) {
@@ -122,7 +128,7 @@ public class MiPushUtils {
 		} else if (deviceType == TYPE_IOS) {
 			sender = new Sender(IOS_APP_SECRET); //需要根据appSecert来发送
 		}		
-		Result result = sender.broadcastAll(buildMessage(title, content, deviceType, timeToSend), 0); 
+		Result result = sender.broadcastAll(buildMessage(title, content, jsonObjectPayload, deviceType, timeToSend), 0); 
 		return result;
 	}
 	
@@ -152,11 +158,12 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param userMobiles
 	 * @param deviceType
 	 * @throws Exception
 	 */
-	private Result sendMessageToAliases(String title, String content, List userMobiles, int deviceType)
+	private Result sendMessageToAliases(String title, String content, JSONObject jsonObjectPayload, List userMobiles, int deviceType)
 			throws Exception {
 		reStartPush(deviceType);
 		Sender sender = null;
@@ -165,7 +172,7 @@ public class MiPushUtils {
 		} else if (deviceType == TYPE_IOS) {
 			sender = new Sender(IOS_APP_SECRET); // 需要根据appSecert来发送
 		}
-		Result result = sender.sendToAlias(buildMessage(title, content, deviceType, 0), userMobiles, 0);// 根据aliasList，发送消息到指定设备上，不重试。
+		Result result = sender.sendToAlias(buildMessage(title, content, jsonObjectPayload, deviceType, 0), userMobiles, 0);// 根据aliasList，发送消息到指定设备上，不重试。
 		return result;
 	}
 
@@ -174,11 +181,12 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param topic
 	 * @param deviceType
 	 * @throws Exception
 	 */
-	private Result sendBroadcast(String title, String content, String topic, int deviceType) throws Exception {
+	private Result sendBroadcast(String title, String content, JSONObject jsonObjectPayload, String topic, int deviceType) throws Exception {
 		reStartPush(deviceType);
 		Sender sender = null;
 		if (deviceType == TYPE_ANDROID) {
@@ -186,7 +194,7 @@ public class MiPushUtils {
 		} else if (deviceType == TYPE_IOS) {
 			sender = new Sender(IOS_APP_SECRET); // 需要根据appSecert来发送
 		}
-		Result broadcast = sender.broadcast(buildMessage(title, content, deviceType, 0), topic, 0);// 根据topic，发送消息到指定一组设备上，不重试。
+		Result broadcast = sender.broadcast(buildMessage(title, content, jsonObjectPayload, deviceType, 0), topic, 0);// 根据topic，发送消息到指定一组设备上，不重试。
 		return broadcast;
 	}
 
@@ -204,7 +212,7 @@ public class MiPushUtils {
 		for (PushBean pushBean : pushBeans) {
 			TargetedMessage message1 = new TargetedMessage();
 			message1.setTarget(TargetedMessage.TARGET_TYPE_ALIAS, userMobile);
-			message1.setMessage(buildMessage(pushBean.getTitle(), pushBean.getContent(), deviceType, 0));
+			message1.setMessage(buildMessage(pushBean.getTitle(), pushBean.getContent(), pushBean.getJsonObjectPayload(), deviceType, 0));
 			messages.add(message1);
 		}
 		return messages;
@@ -215,16 +223,17 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param deviceType
 	 * @param timeToSend
 	 * @return Message
 	 */
-	private Message buildMessage(String title, String content, int deviceType, long timeToSend) throws Exception {
+	private Message buildMessage(String title, String content, JSONObject jsonObjectPayload, int deviceType, long timeToSend) throws Exception {
 		Message message = null;
 		if (deviceType == TYPE_ANDROID) {
-			message = buildMessage2Android(title, content, timeToSend);
+			message = buildMessage2Android(title, content, jsonObjectPayload, timeToSend);
 		} else if (deviceType == TYPE_IOS) {
-			message = buildMessage2IOS(content, timeToSend);
+			message = buildMessage2IOS(content, jsonObjectPayload, timeToSend);
 		}
 		return message;
 	}
@@ -234,11 +243,12 @@ public class MiPushUtils {
 	 *
 	 * @param title
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param timeToSend
 	 * @return
 	 */
-	private Message buildMessage2Android(String title, String content, long timeToSend) throws Exception {
-		Message message = new Message.Builder().title(title).description(content).payload(content)
+	private Message buildMessage2Android(String title, String content, JSONObject jsonObjectPayload, long timeToSend) throws Exception {
+		Message message = new Message.Builder().title(title).description(content).payload(jsonObjectPayload.toJSONString())
 				.restrictedPackageName(ANDROID_PACKAGE_NAME)// 设置包名
 				.passThrough(PASS_THROUGH) // 消息使用透传方式
 				.notifyType(NOTIFY_TYPE) // 使用默认提示音提示
@@ -253,11 +263,13 @@ public class MiPushUtils {
 	 * 构建ios推送信息
 	 *
 	 * @param content
+	 * @param jsonObjectPayload
 	 * @param timeToSend
 	 * @return
 	 */
-	private Message buildMessage2IOS(String content,long timeToSend) throws Exception {
+	private Message buildMessage2IOS(String content, JSONObject jsonObjectPayload, long timeToSend) throws Exception {
 		Message message = new Message.IOSBuilder().description(content).badge(1) // 数字角标
+				.extra("payload", jsonObjectPayload.toJSONString())
 				.timeToSend(timeToSend)
 				.build();
 		return message;
@@ -270,13 +282,24 @@ public class MiPushUtils {
 		try {
 			
 			//向所有android用户发送推送消息
-			Result result2 = miPushUtils.sendBroadcastAll("java push test", "java push content", TYPE_ANDROID, 0);
+			//String payload = "{"test":1,"ok":"It\'s a string"}";
+			JSONObject jsonObjectPayload = new JSONObject();
+			jsonObjectPayload.put("banner_id", 1);
+			jsonObjectPayload.put("banner_cover", "htt://www.baidu.com");
+			jsonObjectPayload.put("banner_jump_type", 2);
+			jsonObjectPayload.put("banner_jump_value", "22");
+			
+			System.out.println(jsonObjectPayload.toJSONString());
+			
+			
+					
+			Result result2 = miPushUtils.sendBroadcastAll("java push test", "java push content", jsonObjectPayload, TYPE_ANDROID, 0);
 			System.out.println("push Android result2 is " + result2.toString());
 			
 			
 			//向单个Android用户发送推送消息
 			String regId = "00Z+fht3K9/hO+/chMpoOlwb+BuHTWyVF0Qk0/zKt/4=";
-			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", regId, TYPE_ANDROID, 0);
+			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_ANDROID, 0);
 			System.out.println("push Android result is " + result.toString());
 
 			
@@ -287,7 +310,7 @@ public class MiPushUtils {
 		    String datetime = simpleDateFormat.format(date);
 		    System.out.println(datetime);
 			//发送订时推送消息
-			Result result3 = miPushUtils.sendMessage("java push test(regId:"+regId+", datetime:"+datetime+")", "java push content(regId:"+regId+")", regId, TYPE_ANDROID, currentTime);
+			Result result3 = miPushUtils.sendMessage("java push test(regId:"+regId+", datetime:"+datetime+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_ANDROID, currentTime);
 			System.out.println("push Android result3 is " + result3.toString());
 			
 		} catch (Exception e) {
