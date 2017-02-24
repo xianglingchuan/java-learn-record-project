@@ -10,7 +10,7 @@ import java.util.List;
 import org.json.simple.JSONObject;
 
 import com.learn.mipush.bean.PushBean;
-
+import com.xiaomi.xmpush.server.Sender;
 
 public class MiPushUtils {
 
@@ -120,7 +120,7 @@ public class MiPushUtils {
 	 * @param timeToSend
 	 * @throws Exception
 	 */
-	public Result sendBroadcastAll(String title, String content, JSONObject jsonObjectPayload, int deviceType,  int timeToSend) throws Exception {
+	public Result sendBroadcastAll(String title, String content, JSONObject jsonObjectPayload, int deviceType,  long timeToSend) throws Exception {
 		reStartPush(deviceType);
 		Sender sender = null;
 		if (deviceType == TYPE_ANDROID) {
@@ -278,9 +278,17 @@ public class MiPushUtils {
 	
 	
 	public static void main(String agrs[]) {
+
+		testIosPush();
+		
+		
+	}
+	
+	//测试android设备推送
+	public static void testAndroidPush(){
+		
 		MiPushUtils miPushUtils = new MiPushUtils("3fSLWUZLVvfg6UOKNCnHyw==","com.snaillove.test","",1);
 		try {
-			
 			//向所有android用户发送推送消息
 			//String payload = "{"test":1,"ok":"It\'s a string"}";
 			JSONObject jsonObjectPayload = new JSONObject();
@@ -288,14 +296,10 @@ public class MiPushUtils {
 			jsonObjectPayload.put("banner_cover", "htt://www.baidu.com");
 			jsonObjectPayload.put("banner_jump_type", 2);
 			jsonObjectPayload.put("banner_jump_value", "22");
-			
 			System.out.println(jsonObjectPayload.toJSONString());
 			
-			
-					
 			Result result2 = miPushUtils.sendBroadcastAll("java push test", "java push content", jsonObjectPayload, TYPE_ANDROID, 0);
 			System.out.println("push Android result2 is " + result2.toString());
-			
 			
 			//向单个Android用户发送推送消息
 			String regId = "00Z+fht3K9/hO+/chMpoOlwb+BuHTWyVF0Qk0/zKt/4=";
@@ -315,6 +319,67 @@ public class MiPushUtils {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}			
 	}
+	
+	
+	public static void testIosPush(){
+		//测试ios设备推送
+		MiPushUtils miPushUtils = new MiPushUtils("","","vmLlxCCUcZRuU0rYyyJMVA==",1);
+		try {
+			
+			//向所有android用户发送推送消息
+			//String payload = "{"test":1,"ok":"It\'s a string"}";
+			JSONObject jsonObjectPayload = new JSONObject();
+			jsonObjectPayload.put("banner_id", 1);
+			jsonObjectPayload.put("banner_cover", "htt://www.baidu.com");
+			jsonObjectPayload.put("banner_jump_type", 2);
+			jsonObjectPayload.put("banner_jump_value", "22");
+			System.out.println(jsonObjectPayload.toJSONString());
+			
+			
+			//向所有ios用户发送推送消息	
+			//Result result2 = miPushUtils.sendBroadcastAll("java push test", "java push content 推送给所有用户", jsonObjectPayload, TYPE_IOS, 0);
+			//System.out.println("push ios result2 is " + result2.toString());
+			
+			
+			//向单个ios用户发送推送消息
+			//String regId = "p75J4RLmrRboBT4gz5T/TCbmErFcReBaeOyjV8G7x9M=";
+			String regId = "CyNRw1zmZISqBlDj/oFo7zZD6Lk7ldQQqmk4f8lrfwg=";			
+//			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_IOS, 0);
+//			System.out.println("push ios result is " + result.toString());
+
+			
+			
+		    long currentTime = System.currentTimeMillis() + 60 * 15 * 1000;
+		    System.out.println("currentTime:"+currentTime);		    
+		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
+		    Date date = new Date(currentTime);
+		    String datetime = simpleDateFormat.format(date);
+		    System.out.println(datetime);
+		    
+		    
+			//发送订时推送消息向单个用户
+			Result result3 = miPushUtils.sendMessage("java定时推送  push title(regId:"+regId+", sendToTime:"+datetime+")", "java push content(regId:"+regId+", sendToTime:"+datetime+")", jsonObjectPayload, regId, TYPE_IOS, currentTime);
+			System.out.println("push ios is " + result3.toString());
+			
+			Result result2 = miPushUtils.sendBroadcastAll("java定时推送 push title 推送给所有用户(sendToTime:"+datetime+")", "java push content 推送给所有用户(sendToTime:"+datetime+")", jsonObjectPayload, TYPE_IOS, currentTime);
+			System.out.println("push ios is " + result2.toString());
+
+			
+			
+		
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		
+	}
+	
+	
+	
+	
+	
 }
