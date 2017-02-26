@@ -325,7 +325,7 @@ public class MiPushUtils {
 	
 	public static void testIosPush(){
 		//测试ios设备推送
-		MiPushUtils miPushUtils = new MiPushUtils("","","vmLlxCCUcZRuU0rYyyJMVA==",1);
+		MiPushUtils miPushUtils = new MiPushUtils("","","vmLlxCCUcZRuU0rYyyJMVA==",0);
 		try {
 			
 			//向所有android用户发送推送消息
@@ -345,13 +345,15 @@ public class MiPushUtils {
 			
 			//向单个ios用户发送推送消息
 			//String regId = "p75J4RLmrRboBT4gz5T/TCbmErFcReBaeOyjV8G7x9M=";
-			String regId = "CyNRw1zmZISqBlDj/oFo7zZD6Lk7ldQQqmk4f8lrfwg=";			
+			//String regId = "CyNRw1zmZISqBlDj/oFo7zZD6Lk7ldQQqmk4f8lrfwg=";	
+			//String regId = "jfXsRlcgbVKUf5qOrqxAckNSbJNK4W5kT6G3oITZReI="; //正式环境
+			String regId = "2Fiw9vUC9xgYdGWFTzI/4EElkkxjDZ5eADXbzWCzUCk=";
 //			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_IOS, 0);
 //			System.out.println("push ios result is " + result.toString());
 
 			
 			
-		    long currentTime = System.currentTimeMillis() + 60 * 15 * 1000;
+		    long currentTime = System.currentTimeMillis() + 60 * 7 * 1000;
 		    System.out.println("currentTime:"+currentTime);		    
 		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
 		    Date date = new Date(currentTime);
