@@ -3,7 +3,6 @@ package com.learn.basicSyntax.tryCatchFinally;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import org.eclipse.jdt.internal.compiler.codegen.MultiCatchExceptionLabel;
 
 public class Demo01 {
 
