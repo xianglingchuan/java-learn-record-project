@@ -149,6 +149,4 @@ public class DeckCardUtil {
 			System.out.println("");
 		}
     }
-	
-	
 }
