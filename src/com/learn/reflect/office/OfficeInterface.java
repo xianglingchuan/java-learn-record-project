@@ -1,6 +1,6 @@
-
-interface OfficeInterface {
-
-	public void start();
-	
-}
+//
+//interface OfficeInterface {
+//
+//	public void start();
+//	
+//}
