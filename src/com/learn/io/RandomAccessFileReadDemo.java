@@ -74,8 +74,6 @@ public class RandomAccessFileReadDemo {
 		//string.getBytes("gbk");
 		System.out.println("string:"+string);
 		
-		
-		
 		raf.close();
 	}
 
