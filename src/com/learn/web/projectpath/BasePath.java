@@ -1,4 +1,4 @@
-package com.learn.webProjectPath;
+package com.learn.web.projectpath;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -18,7 +18,7 @@ public class BasePath {
 		//2、指定类的ClassLoader相应的资源路径
 		String url2 = BasePath.class.getClassLoader().getResource("").toURI().getPath();
 		System.out.println("url2:"+url2);
-		//3、
+		
 		String url3 = ClassLoader.getSystemResource("").toURI().getPath();
 		System.out.println("url3:"+url3);
 		//4、当前类的详细地址，包含路径包名

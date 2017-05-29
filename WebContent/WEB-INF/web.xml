@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"  
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  
-                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
-  version="3.0"> 
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 	<!-- 测试servlet中获取项目路径 -->
 	<servlet>
 		<servlet-name>PathServlet</servlet-name>
-		<servlet-class>com.learn.webProjectPath.PathServlet</servlet-class>
+		<servlet-class>com.learn.web.projectpath.PathServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PathServlet</servlet-name>
 		<url-pattern>/path.action</url-pattern>
 	</servlet-mapping>
+
+
+
+	<!-- 测试servletConfig的使用 这里的init-param要放在servlet中-->
+	<servlet>
+		<servlet-name>ConfigServlet</servlet-name>
+		<servlet-class>com.learn.servletconfig.ConfigServlet</servlet-class>
+		<init-param>
+			<param-name>donwloadPath</param-name>
+			<param-value>/user/downloadPath</param-value>
+		</init-param>
+		<init-param>
+			<param-name>name</param-name>
+			<param-value>root</param-value>
+		</init-param>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>111111111</param-value>
+		</init-param>		
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfigServlet</servlet-name>
+		<url-pattern>/config.action</url-pattern>
+	</servlet-mapping>	
 	
 	
-	
+	<servlet>
+		<servlet-name>ConfigDemo2Servlet</servlet-name>
+		<servlet-class>com.learn.servletconfig.ConfigDemo2Servlet</servlet-class>
+		<init-param>
+			<param-name>donwloadPath</param-name>
+			<param-value>/user/downloadPath</param-value>
+		</init-param>
+		<init-param>
+			<param-name>name</param-name>
+			<param-value>root</param-value>
+		</init-param>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>111111111</param-value>
+		</init-param>		
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfigDemo2Servlet</servlet-name>
+		<url-pattern>/config2.action</url-pattern>
+	</servlet-mapping>
 		
+	
+
+
+
+
+
 </web-app>

@@ -1,4 +1,4 @@
-package com.learn.webProjectPath;
+package com.learn.web.projectpath;
 
 import java.io.IOException;
 
