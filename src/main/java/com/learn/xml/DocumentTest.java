@@ -54,7 +54,8 @@ public class DocumentTest {
 					if(childNodes.item(k).getNodeType() == Node.ELEMENT_NODE){
 					     //获取了element类型节点的节点名
 						String nodeName = childNodes.item(k).getNodeName();
-						String nodeValue = childNodes.item(k).getTextContent();
+						//String nodeValue = childNodes.item(k).getTextContent();
+						String nodeValue = childNodes.item(k).getNodeValue();
 						System.out.println("================节点名称和值是:"+nodeName+"="+nodeValue+"================");
 						NamedNodeMap childAttrs =  childNodes.item(k).getAttributes();
 						for (int v = 0; v < childAttrs.getLength(); v++) {

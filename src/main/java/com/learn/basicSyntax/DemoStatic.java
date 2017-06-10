@@ -30,15 +30,13 @@ public class DemoStatic {
 	public void show() {
 		System.out.println("姓名：" + name + "，性别：" + sex + "，年龄：" + age);
 	}
+	
     
 	public static void main(String[] args) {
-        
         // 创建对象
 		DemoStatic hello = new DemoStatic();
 		// 调用对象的show方法
-		hello.show();
-        
-        
+		hello.show();   
 	}
 	
 	

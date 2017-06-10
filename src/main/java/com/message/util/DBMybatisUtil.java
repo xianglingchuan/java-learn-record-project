@@ -21,7 +21,7 @@ public class DBMybatisUtil {
 		//在Maven中读取Mybatis路径地址
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		//InputStream is = classloader.getResourceAsStream("Configuration.xml");
-		reader = Resources.getResourceAsReader(classloader, "Configuration.xml");
+		reader = Resources.getResourceAsReader(classloader, "mybatis/Configuration.xml");
 		
 		// 通过配置信息构建一个SqlSessionFactory
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);

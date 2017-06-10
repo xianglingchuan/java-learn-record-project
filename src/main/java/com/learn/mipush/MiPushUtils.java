@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.json.simple.JSONObject;
 
@@ -248,14 +249,18 @@ public class MiPushUtils {
 	 * @return
 	 */
 	private Message buildMessage2Android(String title, String content, JSONObject jsonObjectPayload, long timeToSend) throws Exception {
+		
+		long currentTime =System.currentTimeMillis(); 
+		System.out.println((int)currentTime);
 		Message message = new Message.Builder().title(title).description(content).payload(jsonObjectPayload.toJSONString())
 				.restrictedPackageName(ANDROID_PACKAGE_NAME)// 设置包名
 				.passThrough(PASS_THROUGH) // 消息使用透传方式
 				.notifyType(NOTIFY_TYPE) // 使用默认提示音提示
 				.enableFlowControl(true) // 控制消息是否需要进行平缓发送
 				.timeToSend(timeToSend)  //定时推送时间
+				.notifyId(5)				
 				.build();
-        return message;
+	    return message;
 	}
 	
 
@@ -281,13 +286,17 @@ public class MiPushUtils {
 
 		testIosPush();
 		
+		//testAndroidPush();
+		
 		
 	}
 	
 	//测试android设备推送
 	public static void testAndroidPush(){
 		
-		MiPushUtils miPushUtils = new MiPushUtils("3fSLWUZLVvfg6UOKNCnHyw==","com.snaillove.test","",1);
+		//
+		//MiPushUtils miPushUtils = new MiPushUtils("3fSLWUZLVvfg6UOKNCnHyw==","com.snaillove.test","",1);
+		MiPushUtils miPushUtils = new MiPushUtils("sba23N2G6U7dJgzhb1/LJQ==","com.chipsguide.app.colorbluetoothlamp.v2","",1);
 		try {
 			//向所有android用户发送推送消息
 			//String payload = "{"test":1,"ok":"It\'s a string"}";
@@ -298,24 +307,25 @@ public class MiPushUtils {
 			jsonObjectPayload.put("banner_jump_value", "22");
 			System.out.println(jsonObjectPayload.toJSONString());
 			
-			Result result2 = miPushUtils.sendBroadcastAll("java push test", "java push content", jsonObjectPayload, TYPE_ANDROID, 0);
+			Result result2 = miPushUtils.sendBroadcastAll("java push test33", "java push content33", jsonObjectPayload, TYPE_ANDROID, 0);
 			System.out.println("push Android result2 is " + result2.toString());
 			
 			//向单个Android用户发送推送消息
-			String regId = "00Z+fht3K9/hO+/chMpoOlwb+BuHTWyVF0Qk0/zKt/4=";
-			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_ANDROID, 0);
-			System.out.println("push Android result is " + result.toString());
+//			String regId = "00Z+fht3K9/hO+/chMpoOlwb+BuHTWyVF0Qk0/zKt/4=";
+//			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_ANDROID, 0);
+//			System.out.println("push Android result is " + result.toString());
 
 			
-		    long currentTime = System.currentTimeMillis() + 60 * 2 * 1000;
+		    //long currentTime = System.currentTimeMillis() + 60 * 2 * 1000;
+			long currentTime = System.currentTimeMillis();
 		    System.out.println("currentTime:"+currentTime);		    
 		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
 		    Date date = new Date(currentTime);
 		    String datetime = simpleDateFormat.format(date);
 		    System.out.println(datetime);
 			//发送订时推送消息
-			Result result3 = miPushUtils.sendMessage("java push test(regId:"+regId+", datetime:"+datetime+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_ANDROID, currentTime);
-			System.out.println("push Android result3 is " + result3.toString());
+			//Result result3 = miPushUtils.sendMessage("java push test(regId:"+regId+", datetime:"+datetime+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_ANDROID, currentTime);
+			//System.out.println("push Android result3 is " + result3.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -324,8 +334,10 @@ public class MiPushUtils {
 	
 	
 	public static void testIosPush(){
-		//测试ios设备推送
-		MiPushUtils miPushUtils = new MiPushUtils("","","vmLlxCCUcZRuU0rYyyJMVA==",1);
+		//测试ios设备推送   
+		//小猪班克 mLlxCCUcZRuU0rYyyJMVA==
+		//iLight JUuYTHEYAQkN2KNGrvYgrQ==
+		MiPushUtils miPushUtils = new MiPushUtils("","","JUuYTHEYAQkN2KNGrvYgrQ==",0);
 		try {
 			//向所有android用户发送推送消息
 			//String payload = "{"test":1,"ok":"It\'s a string"}";
@@ -341,7 +353,6 @@ public class MiPushUtils {
 			//Result result2 = miPushUtils.sendBroadcastAll("java push test", "java push content 推送给所有用户", jsonObjectPayload, TYPE_IOS, 0);
 			//System.out.println("push ios result2 is " + result2.toString());
 			
-			
 			//向单个ios用户发送推送消息
 			//String regId = "p75J4RLmrRboBT4gz5T/TCbmErFcReBaeOyjV8G7x9M=";
 			//String regId = "CyNRw1zmZISqBlDj/oFo7zZD6Lk7ldQQqmk4f8lrfwg=";	
@@ -351,31 +362,24 @@ public class MiPushUtils {
 //			Result result = miPushUtils.sendMessage("java push test(regId:"+regId+")", "java push content(regId:"+regId+")", jsonObjectPayload, regId, TYPE_IOS, 0);
 //			System.out.println("push ios result is " + result.toString());
 
-			
-			
-		    long currentTime = System.currentTimeMillis() + 60 * 30 * 1000;
+
+		    //long currentTime = System.currentTimeMillis() + 1 * 1 * 1000;
+			long currentTime = System.currentTimeMillis();
 		    System.out.println("currentTime:"+currentTime);		    
 		    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
 		    Date date = new Date(currentTime);
 		    String datetime = simpleDateFormat.format(date);
 		    System.out.println(datetime);
 		    
-		    
 			//发送订时推送消息向单个用户
 			Result result3 = miPushUtils.sendMessage("java定时推送  push title(regId:"+regId+", sendToTime:"+datetime+")", "java push content(regId:"+regId+", sendToTime:"+datetime+")", jsonObjectPayload, regId, TYPE_IOS, currentTime);
 			System.out.println("push ios is " + result3.toString());
 			
 			Result result2 = miPushUtils.sendBroadcastAll("java定时推送 push title 推送给所有用户(sendToTime:"+datetime+")", "java push content 推送给所有用户(sendToTime:"+datetime+")", jsonObjectPayload, TYPE_IOS, currentTime);
-			System.out.println("push ios is " + result2.toString());
+			System.out.println("push ios is 11 " + result2.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		
 	}
-	
-	
-	
-	
-	
 }

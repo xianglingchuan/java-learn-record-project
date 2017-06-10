@@ -1,96 +1,154 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.learn</groupId>
-  <artifactId>learn</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>learn Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <!-- 加入mybatis到pom文件中 -->    
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.4.4</version>
-    </dependency>
-    
-    
-    <!-- start 在JSP界面中加入jstl标签库时出现问题
-         加入的后两个jstl库都无法使用，目前还没有分析出原因所在，
-         目前已知的情况是后两个标签库好像已经将  org.apache.taglibs 包含到一个jar包中去了
-     -->
-	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
-	<dependency>
-	    <groupId>javax.servlet.jsp.jstl</groupId>
-	    <artifactId>jstl-api</artifactId>
-	    <version>1.2</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
-	<dependency>
-	    <groupId>org.apache.taglibs</groupId>
-	    <artifactId>taglibs-standard-impl</artifactId>
-	    <version>1.2.5</version>
-	</dependency>
-    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
-	<!-- <dependency>
-	    <groupId>javax.servlet.jsp.jstl</groupId>
-	    <artifactId>jstl</artifactId>
-	    <version>1.2</version>
-	</dependency> -->
-	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
-	<!-- <dependency>
-	    <groupId>javax.servlet.jsp.jstl</groupId>
-	    <artifactId>jstl</artifactId>
-	    <version>1.2</version>
-	</dependency>    --> 
-	<!-- end 在JSP界面中加入jstl标签库时出现问题 -->
-	
-	
-    
-    <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    
-	<!-- https://mvnrepository.com/artifact/org.jdom/jdom -->
-	<dependency>
-	    <groupId>org.jdom</groupId>
-	    <artifactId>jdom</artifactId>
-	    <version>2.0.2</version>
-	</dependency>
-    
-	<dependency>
-	    <groupId>com.googlecode.json-simple</groupId>
-	    <artifactId>json-simple</artifactId>
-	    <version>1.1.1</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-	<dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>6.0.6</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
-	<dependency>
-	    <groupId>net.sourceforge.jexcelapi</groupId>
-	    <artifactId>jxl</artifactId>
-	    <version>2.6.12</version>
-	</dependency>	
-	
-    
-  </dependencies>
-  <build>
-    <finalName>learn</finalName>
-  </build>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.learn</groupId>
+	<artifactId>learn</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>learn Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 加入mybatis到pom文件中 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.4</version>
+			<!-- 这里想去掉log4j的依赖关系，重新自己引入slf4j来处理日志，但没有成功 -->
+			<!-- <exclusions>
+				    <groupId>log4j</groupId>  
+				    <artifactId>log4j</artifactId>  
+				    <version>1.2.14</version>  
+				    <scope>provided</scope> 			   
+			</exclusions> -->
+		</dependency>
+
+
+		<!-- start 在JSP界面中加入jstl标签库时出现问题 加入的后两个jstl库都无法使用，目前还没有分析出原因所在， 目前已知的情况是后两个标签库好像已经将 
+			org.apache.taglibs 包含到一个jar包中去了 -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>jstl-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-impl</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+		<!-- <dependency> <groupId>javax.servlet.jsp.jstl</groupId> <artifactId>jstl</artifactId> 
+			<version>1.2</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
+		<!-- <dependency> <groupId>javax.servlet.jsp.jstl</groupId> <artifactId>jstl</artifactId> 
+			<version>1.2</version> </dependency> -->
+		<!-- end 在JSP界面中加入jstl标签库时出现问题 -->
+
+
+
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jdom/jdom -->
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+
+
+
+		<!-- start 加入SpringMVC相关的jar文件 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<!-- 加入日志记录内容 但与其它jar包的log4j有实现的冲突，所以不能使用，进一步解决还需要深入了解 -->
+		<!-- 		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.8.0-alpha2</version>
+		</dependency>				
+		<dependency>
+	         <groupId>org.slf4j</groupId>
+	         <artifactId>log4j-over-slf4j</artifactId>
+	         <version>1.7.7</version>
+	     </dependency> -->
+	          
+	     
+	     
+	     
+		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.lang -->
+		<!-- ReflectionToStringBuilder.toString(object) 很方便的输出各种类型数据的key=>value格式信息
+		 -->
+		<dependency>
+		    <groupId>org.apache.directory.studio</groupId>
+		    <artifactId>org.apache.commons.lang</artifactId>
+		    <version>2.6</version>
+		</dependency>		   
+     
+     
+        <!-- 上传文件jar包 --> 
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>     
+     		
+		<!-- end 加入SpringMVC相关的jar文件 -->
+		
+		
+		
+
+	</dependencies>
+	<build>
+		<finalName>learn</finalName>
+	</build>
 </project>

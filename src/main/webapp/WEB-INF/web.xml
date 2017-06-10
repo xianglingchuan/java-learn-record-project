@@ -4,129 +4,206 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>learn</display-name>
-    <display-name>Archetype Created Web Application</display-name>
-    
-      <!-- start Servlet配置学习 -->
-	  <servlet>
-	    <servlet-name>PathServlet</servlet-name>
-	    <servlet-class>com.learn.web.projectpath.PathServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>PathServlet</servlet-name>
-	    <url-pattern>/path.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>ConfigServlet</servlet-name>
-	    <servlet-class>com.learn.servletconfig.ConfigServlet</servlet-class>
-	    <init-param>
-	      <param-name>donwloadPath</param-name>
-	      <param-value>/user/downloadPath</param-value>
-	    </init-param>
-	    <init-param>
-	      <param-name>name</param-name>
-	      <param-value>root</param-value>
-	    </init-param>
-	    <init-param>
-	      <param-name>password</param-name>
-	      <param-value>111111111</param-value>
-	    </init-param>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>ConfigServlet</servlet-name>
-	    <url-pattern>/config.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>ConfigDemo2Servlet</servlet-name>
-	    <servlet-class>com.learn.servletconfig.ConfigDemo2Servlet</servlet-class>
-	    <init-param>
-	      <param-name>donwloadPath</param-name>
-	      <param-value>/user/downloadPath</param-value>
-	    </init-param>
-	    <init-param>
-	      <param-name>name</param-name>
-	      <param-value>root</param-value>
-	    </init-param>
-	    <init-param>
-	      <param-name>password</param-name>
-	      <param-value>111111111</param-value>
-	    </init-param>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>ConfigDemo2Servlet</servlet-name>
-	    <url-pattern>/config2.action</url-pattern>
-	  </servlet-mapping>
-	  <!-- end Servlet配置学习 -->
+	<display-name>Archetype Created Web Application</display-name>
+
+	<!-- start Servlet配置学习 -->
+	<servlet>
+		<servlet-name>PathServlet</servlet-name>
+		<servlet-class>com.learn.web.projectpath.PathServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PathServlet</servlet-name>
+		<url-pattern>/path.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ConfigServlet</servlet-name>
+		<servlet-class>com.learn.servletconfig.ConfigServlet</servlet-class>
+		<init-param>
+			<param-name>donwloadPath</param-name>
+			<param-value>/user/downloadPath</param-value>
+		</init-param>
+		<init-param>
+			<param-name>name</param-name>
+			<param-value>root</param-value>
+		</init-param>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>111111111</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfigServlet</servlet-name>
+		<url-pattern>/config.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ConfigDemo2Servlet</servlet-name>
+		<servlet-class>com.learn.servletconfig.ConfigDemo2Servlet</servlet-class>
+		<init-param>
+			<param-name>donwloadPath</param-name>
+			<param-value>/user/downloadPath</param-value>
+		</init-param>
+		<init-param>
+			<param-name>name</param-name>
+			<param-value>root</param-value>
+		</init-param>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>111111111</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfigDemo2Servlet</servlet-name>
+		<url-pattern>/config2.action</url-pattern>
+	</servlet-mapping>
+	<!-- end Servlet配置学习 -->
+
+
+	<!-- start 消息前后台展示学习配置 -->
+	<servlet>
+		<servlet-name>ListServlet</servlet-name>
+		<servlet-class>com.message.servlet.ListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ListServlet</servlet-name>
+		<url-pattern>/list.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DeleteOneServlet</servlet-name>
+		<servlet-class>com.message.servlet.DeleteOneServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteOneServlet</servlet-name>
+		<url-pattern>/deleteOne.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DeleteBatchServlet</servlet-name>
+		<servlet-class>com.message.servlet.DeleteBatchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteBatchServlet</servlet-name>
+		<url-pattern>/deleteBatch.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CreateServlet</servlet-name>
+		<servlet-class>com.message.servlet.CreateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateServlet</servlet-name>
+		<url-pattern>/create.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EditServlet</servlet-name>
+		<servlet-class>com.message.servlet.EditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditServlet</servlet-name>
+		<url-pattern>/edit.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SaveServlet</servlet-name>
+		<servlet-class>com.message.servlet.SaveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SaveServlet</servlet-name>
+		<url-pattern>/save.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>InitTalkServlet</servlet-name>
+		<servlet-class>com.message.servlet.InitTalkServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InitTalkServlet</servlet-name>
+		<url-pattern>/inittalk.action</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AutoReplyServlet</servlet-name>
+		<servlet-class>com.message.servlet.AutoReplyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AutoReplyServlet</servlet-name>
+		<url-pattern>/AutoReplyServlet.action</url-pattern>
+	</servlet-mapping>
+	<!-- end 消息前后台展示学习配置 -->
+
+
+
+    <!--start Spring 相关配置-->
+    <!-- ***************** -->
+    <!-- 配置Spring容器 -->
+    <context-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>classpath:/springmvc/applicationContext*.xml</param-value>
+    </context-param>
+	<!-- 配置一个监听器 -->
+	<listener>
+	     <listener-class>
+	        org.springframework.web.context.ContextLoaderListener
+	     </listener-class>
+	</listener>
+    <!-- 配置前端控制器 -->
+    <servlet>
+       <servlet-name>spring</servlet-name>
+       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+       <init-param>
+           <!-- ContextconfigLocation配置springmvc加载的配置文件适配器、处理映射器等 -->
+           <param-name>contextConfigLocation</param-name>
+           <param-value>classpath:/springmvc/mvc-dispatcher-servlet.xml</param-value>
+       </init-param>
+       <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <!-- 1、.action访问以.action结尾的由DispatcherServlet进行解析
+        2、/,所有访问由DispatcherServlet进行解析  -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
   
-  
-      <!-- start 消息前后台展示学习配置 -->
-	  <servlet>
-	    <servlet-name>ListServlet</servlet-name>
-	    <servlet-class>com.message.servlet.ListServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>ListServlet</servlet-name>
-	    <url-pattern>/list.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>DeleteOneServlet</servlet-name>
-	    <servlet-class>com.message.servlet.DeleteOneServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>DeleteOneServlet</servlet-name>
-	    <url-pattern>/deleteOne.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>DeleteBatchServlet</servlet-name>
-	    <servlet-class>com.message.servlet.DeleteBatchServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>DeleteBatchServlet</servlet-name>
-	    <url-pattern>/deleteBatch.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>CreateServlet</servlet-name>
-	    <servlet-class>com.message.servlet.CreateServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>CreateServlet</servlet-name>
-	    <url-pattern>/create.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>EditServlet</servlet-name>
-	    <servlet-class>com.message.servlet.EditServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>EditServlet</servlet-name>
-	    <url-pattern>/edit.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>SaveServlet</servlet-name>
-	    <servlet-class>com.message.servlet.SaveServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>SaveServlet</servlet-name>
-	    <url-pattern>/save.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>InitTalkServlet</servlet-name>
-	    <servlet-class>com.message.servlet.InitTalkServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>InitTalkServlet</servlet-name>
-	    <url-pattern>/inittalk.action</url-pattern>
-	  </servlet-mapping>
-	  <servlet>
-	    <servlet-name>AutoReplyServlet</servlet-name>
-	    <servlet-class>com.message.servlet.AutoReplyServlet</servlet-class>
-	  </servlet>
-	  <servlet-mapping>
-	    <servlet-name>AutoReplyServlet</servlet-name>
-	    <url-pattern>/AutoReplyServlet.action</url-pattern>
-	  </servlet-mapping>
-	  <!-- end 消息前后台展示学习配置 -->
-  
-      
-    
-    
-    
+    <!-- 解决post乱码问题的过滤器 -->
+	<filter>
+	      <filter-name>CharacterEncodingFilter</filter-name>
+	      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	      <init-param>
+	          <param-name>encoding</param-name>
+	          <param-value>utf-8</param-value>
+	      </init-param>
+	 </filter>
+	 <filter-mapping>
+	      <filter-name>CharacterEncodingFilter</filter-name>
+	      <url-pattern>/*</url-pattern>
+	 </filter-mapping>
+	 <!-- ***************** -->
+     <!-- end Spring 相关配置 -->
+	
+	
+	
+	
+	
+	
+	<welcome-file-list>
+	  <welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
 </web-app>
