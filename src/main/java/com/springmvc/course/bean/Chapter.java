@@ -1,11 +1,36 @@
-package com.springmvc.mvcdemo.model;
+package com.springmvc.course.bean;
 
+
+/*
+ * 课程章节模型 
+ */
 public class Chapter {
 
+	/*
+	 * 自增长ID 
+	 */
 	private Integer id;
+	
+	/*
+	 * 课程ID号
+	 */
 	private Integer courseId;
+	
+	/*
+	 * 章节排序
+	 */
 	private Integer order;
+	
+	
+	/*
+	 * 章节标题
+	 */	
 	private String title;
+	
+	
+	/*
+	 * 章节描述
+	 */		
 	private String descr;
 
 	public Integer getId() {

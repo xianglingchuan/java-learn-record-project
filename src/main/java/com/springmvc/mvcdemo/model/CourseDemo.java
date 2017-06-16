@@ -3,7 +3,7 @@ package com.springmvc.mvcdemo.model;
 import java.net.Inet4Address;
 import java.util.List;
 
-public class Course {
+public class CourseDemo {
 
 	// 课程Id
 	private Integer courseId;
@@ -22,14 +22,14 @@ public class Course {
 	// 课程介绍
 	private String descr;
 	// 课程提钢
-	private List<Chapter> chapterList;
+	private List<ChapterDemo> chapterList;
 
-	public Course() {
+	public CourseDemo() {
 		super();
 	}
 
-	public Course(Integer courseId, String title, String imgPath, Integer learningNum, Long duration, Integer level,
-			String levelDesc, String descr, List<Chapter> chapterList) {
+	public CourseDemo(Integer courseId, String title, String imgPath, Integer learningNum, Long duration, Integer level,
+			String levelDesc, String descr, List<ChapterDemo> chapterList) {
 		super();
 		this.courseId = courseId;
 		this.title = title;
@@ -106,11 +106,11 @@ public class Course {
 		this.descr = descr;
 	}
 
-	public List<Chapter> getChapterList() {
+	public List<ChapterDemo> getChapterList() {
 		return chapterList;
 	}
 
-	public void setChapterList(List<Chapter> chapterList) {
+	public void setChapterList(List<ChapterDemo> chapterList) {
 		this.chapterList = chapterList;
 	}
 

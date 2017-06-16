@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.springmvc.mvcdemo.model.Course;
-import com.springmvc.mvcdemo.service.CourseService;
+import com.springmvc.mvcdemo.model.CourseDemo;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.catalina.connector.Request;
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+//import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
 import org.apache.commons.io.FileUtils;
 //import org.slf4j.Logger;
@@ -36,13 +35,7 @@ public class CourseController {
 	
 	private static Logger log = Logger.getLogger(CourseController.class);
 	
-	private CourseService courseService;
 	
-	//自动装载该Server对接
-	@Autowired
-	public void setCourseService(CourseService courseService){
-		this.courseService = courseService;
-	}
 	
 	/*
 	 * 本方法将处理/courses/view?courseId=321格式
@@ -55,9 +48,9 @@ public class CourseController {
 		System.out.println("courseId:"+courseId);
 		//logger.debug("logger In viewCourse, courseId = {}", courseId);
 		log.debug("logger2 In viewCourse, courseId = "+courseId);
-		Course course = new Course();
+		CourseDemo course = new CourseDemo();
 		if(courseId!=null && courseId>=1){
-			course = courseService.getCourseById(courseId);
+			//course = courseService.getCourseById(courseId);
 		}
 		model.addAttribute("course",course);
 		return "springmvc/mvcdemo/view";
@@ -75,9 +68,9 @@ public class CourseController {
 		log.debug("In infoCourse, offset = "+offset);
 		log.debug("In infoCourse, limit = "+limit);
 		log.debug("In infoCourse, page = "+page);
-		Course course = new Course();
+		CourseDemo course = new CourseDemo();
 		if(courseId!=null && courseId>=1){
-			course = courseService.getCourseById(courseId);
+			//course = courseService.getCourseById(courseId);
 		}
 		model.addAttribute("course",course);
 		return "springmvc/mvcdemo/view";
@@ -91,9 +84,9 @@ public class CourseController {
 	@RequestMapping("/detail/{courseId}")
 	public String detailCourse(@PathVariable("courseId") Integer courseId, Map<String, Object> model){
 		log.debug("In detailCourse, courseId = "+courseId);
-		Course course = new Course();
+		CourseDemo course = new CourseDemo();
 		if(courseId!=null && courseId>=1){
-			course = courseService.getCourseById(courseId);
+			//course = courseService.getCourseById(courseId);
 		}	
 		model.put("course", course);
 		return "springmvc/mvcdemo/view";
@@ -110,9 +103,9 @@ public class CourseController {
 		log.debug("In detailsCourse, offset = "+offset);
 		log.debug("In detailsCourse, limit = "+limit);
 		log.debug("In detailsCourse, page = "+page);
-		Course course = new Course();
+		CourseDemo course = new CourseDemo();
 		if(courseId!=null && courseId>=1){
-			course = courseService.getCourseById(courseId);
+			//course = courseService.getCourseById(courseId);
 		}	
 		model.put("course", course);
 		return "springmvc/mvcdemo/view";
@@ -146,10 +139,10 @@ public class CourseController {
 	 * 这里使不使用@ModelAttribute方法都可以绑定相应的内容
 	 */
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String saveCourse(@ModelAttribute Course course){
+	public String saveCourse(@ModelAttribute CourseDemo course){
 		log.debug("In saveCourse");
 		course.setCourseId(321);
-		log.debug("course Info:"+ReflectionToStringBuilder.toString(course));
+		//log.debug("course Info:"+ReflectionToStringBuilder.toString(course));
 		//将请求重新定向某个方法上
 		//return "redirect:view?courseId="+course.getCourseId();
 		//将请求转发到frowardSave方法中,这里的请求转发并没有将course.setCournseId(321)给带到另外一个界面
@@ -161,10 +154,10 @@ public class CourseController {
 	 * 测试请求转发内容
 	 */
 	@RequestMapping(value="/forwardSave", method=RequestMethod.POST)
-	public String forwardSaveCourse(@ModelAttribute Course course){
+	public String forwardSaveCourse(@ModelAttribute CourseDemo course){
 		log.debug("In forwardSaveCourse");
 		course.setCourseId(456);
-		log.debug("course Info:"+ReflectionToStringBuilder.toString(course));		
+		//log.debug("course Info:"+ReflectionToStringBuilder.toString(course));		
 		return "redirect:view?courseId="+course.getCourseId();
 	}
 	

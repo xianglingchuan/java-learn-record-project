@@ -1,20 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.springmvc.course.service" />
+<!-- 	<context:component-scan base-package="com.snaillove.common.service" />
+ -->	
+	<!-- 引入配置文件 -->
+    <!--<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>-->
+	<!-- 配置数据源 -->
+    <!--<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/learn" />
+		<property name="username" value="root" />
+		<property name="password" value="111111" />
+	</bean> -->
+	
+	
+	
+	<!-- 加载所有环境的jdbc配置文件 -->
+    <context:property-placeholder location="classpath:jdbc/jdbc_product.properties,classpath:jdbc/jdbc_test.properties,classpath:jdbc/jdbc_dev.properties" />
+    
+    <!-- 开发环境数据源配置 -->
+  	<bean id="dataSourceDev" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${dev_driver}" />
+		<property name="url" value="${dev_url}" />
+		<property name="username" value="${dev_jdbc.username}" />
+		<property name="password" value="${dev_jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${dev_initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxTotal" value="${dev_maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${dev_maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${dev_minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWaitMillis" value="${dev_maxWait}"></property>
+	</bean>
 
-	<context:annotation-config />
-
-	<context:component-scan base-package="com.springmvc">
-	    <!-- 这里告诉他不用管理Controller了，所以使用了exclude -->
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
+    <!-- 正式环境数据源配置 -->
+	<bean id="dataSourceProduct" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${product_driver}" />
+		<property name="url" value="${product_url}" />
+		<property name="username" value="${product_jdbc.username}" />
+		<property name="password" value="${product_jdbc.password}" />
+		<property name="initialSize" value="${product_initialSize}"></property>
+		<property name="maxTotal" value="${product_maxActive}"></property>
+		<property name="maxIdle" value="${product_maxIdle}"></property>
+		<property name="minIdle" value="${product_minIdle}"></property>
+		<property name="maxWaitMillis" value="${product_maxWait}"></property>
+	</bean>
+	
+    <!-- 测试环境数据源配置 -->
+	<bean id="dataSourceTest" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${test_driver}" />
+		<property name="url" value="${test_url}" />
+		<property name="username" value="${test_jdbc.username}" />
+		<property name="password" value="${test_jdbc.password}" />
+		<property name="initialSize" value="${test_initialSize}"></property>
+		<property name="maxTotal" value="${test_maxActive}"></property>
+		<property name="maxIdle" value="${test_maxIdle}"></property>
+		<property name="minIdle" value="${test_minIdle}"></property>
+		<property name="maxWaitMillis" value="${test_maxWait}"></property>
+	</bean>
+	
+    <!-- 多数据源配置信息 -->
+	<bean id="multipleDataSource" class="com.springmvc.common.config.datasource.MultipleDataSource">
+		<property name="defaultTargetDataSource" ref="dataSourceDev" />
+		<property name="targetDataSources">
+			<map>
+				<entry key="dataSourceDev" value-ref="dataSourceDev" />
+				<entry key="dataSourceProduct" value-ref="dataSourceProduct" />
+				<entry key="dataSourceTest" value-ref="dataSourceTest" />
+			</map>
+		</property>
+	</bean>	
 		
+
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="multipleDataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath:mappings/**/*.xml"></property>
+		<!-- 就算不引入mybatis-config文件也可以正常启动程序了 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+		<!-- <property name="configLocation" value="classpath*:conf/mybatis-config.xml"></property> -->
+	</bean> 
+	
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.springmvc/**/dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+<!-- 	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceDev" />
+	</bean> -->
 </beans>
