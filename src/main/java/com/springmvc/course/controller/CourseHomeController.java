@@ -14,11 +14,9 @@ import com.springmvc.course.service.CourseService;
 @Controller
 @RequestMapping("/coursehome")
 public class CourseHomeController {
-
 	
 	@Autowired
     private CourseService courseService;
-	
 	
     @RequestMapping(value="/index",method=RequestMethod.GET)
     public String home(Model model){

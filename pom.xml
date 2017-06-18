@@ -67,7 +67,8 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.9.2</version>
+			<!-- <version>1.9.2</version> -->
+			<version>1.8.3</version>
 		</dependency>
 				
 		<dependency>
@@ -190,6 +191,22 @@
 			<version>2.1.1</version>
 		</dependency>
 		<!-- end 引入mybatis+spring MVC相关的包 -->
+		
+		
+		<!-- start springMVC表单验证 -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>1.1.0.Final</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>5.1.2.Final</version>
+		</dependency>
+		<!-- end springMVC表单验证 -->
+		
 		
 	</dependencies>
 	<build>

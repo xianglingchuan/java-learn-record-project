@@ -11,9 +11,9 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	
 	<!-- 自动扫描 -->
-	<context:component-scan base-package="com.springmvc.course.service" />
-<!-- 	<context:component-scan base-package="com.snaillove.common.service" />
- -->	
+	<context:component-scan base-package="com.springmvc/**/service" />
+    <!--<context:component-scan base-package="com.snaillove.common.service" />-->	
+    
 	<!-- 引入配置文件 -->
     <!--<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -105,7 +105,7 @@
 		<property name="basePackage" value="com.springmvc/**/dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-
+	
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
 <!-- 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

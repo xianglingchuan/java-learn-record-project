@@ -15,5 +15,4 @@ public class MultipleDataSource extends AbstractRoutingDataSource {
 	protected Object determineCurrentLookupKey() {		
 		return dataSourceKey.get();
 	}
-
 }

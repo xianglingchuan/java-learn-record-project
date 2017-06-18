@@ -72,15 +72,12 @@
 	  suffix：后缀覆盖并增加其内容
 	  prefixOverrides：前缀判断的条件
 	  suffixOverrides：后缀判断的条件
-
 	trim元素的主要功能是可以在自己包含的内容钱加上某些前缀，也可以在其后加上某写后缀，与之对应的属性是prefix和suffix；
 	可以把包含内容的首部某些内容覆盖，即忽略，也可以把尾部的某些内容覆盖，对应的属性是prefixOverrides和suffixOverrides。
 	-->	
 	
 	 <!-- 
-	 
 	 请注意这里的${command}的使用方法， order by ${command}
-	 
 	 -->
 	  <select id="queryListByTrim" parameterType="com.message.bean.Message" resultMap="MessageResult">    
 	    select * from message
@@ -121,10 +118,4 @@
         </trim>
     </insert>
     <!-- INSERT INTO message ( ID, COMMAND, DESCRIPTION, CONTENT ) values ( null, ?, ?, ? ) -->
-    
-    	
-	
-	
-	
-	
 </mapper>
