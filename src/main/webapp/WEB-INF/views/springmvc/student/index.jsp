@@ -11,10 +11,6 @@
   <body>
   
     <form:form modelAttribute="validatorBean" method="post">     
-        
-       
-        
-        
         登录用户名:<form:input path="username" /><br/>
         <span style="color: red;"><form:errors path="username" /></span><br/>
         

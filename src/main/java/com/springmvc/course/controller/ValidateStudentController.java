@@ -72,30 +72,11 @@ public class ValidateStudentController {
     public String form4(Model model,
     		@Valid @ModelAttribute("validatorBookInfo") ValidatorBookInfo validatorBookInfo, 
     		BindingResult result   		
-    		){
-		
+    		){		
 		System.out.println("book --> " + validatorBookInfo.getValidatorBook());
 		System.out.println("student --> " + validatorBookInfo.getValidatorStudent());
-		
-		
 		ValidatorBook validatorBook = validatorBookInfo.getValidatorBook();
 		System.out.println("errorCount:"+result.getErrorCount());
-		
-		
-		
-		
-		
-		
-//		String message = "save";
-//		redirectAttributes.addFlashAttribute("message", message);
-//		return message;
-		
-		
-//    	if(result.getErrorCount()<=0){
-//    		 //开始数据提交工作
-//    		 //返回提交成功界面
-//    		 return "redirect:success"; 
-//    	}
         return "springmvc/student/form4";
     }
 	
