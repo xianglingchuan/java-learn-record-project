@@ -17,7 +17,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.aspectj.weaver.tools.cache.FlatFileCacheBacking;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -26,8 +25,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ValidatorBean {
 
+	
 	/**
+	 * 
 	 * 登录用户名
+	 * 
 	 */
 	// message 直接提供错误信息
 	@NotNull(message = "username 不能为空")

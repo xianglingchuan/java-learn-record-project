@@ -1,7 +1,6 @@
 package com.springmvc.course.controller;
 
 import java.io.UnsupportedEncodingException;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
