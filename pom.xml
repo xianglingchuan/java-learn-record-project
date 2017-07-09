@@ -208,6 +208,20 @@
 		<!-- end springMVC表单验证 -->
 		
 		
+		<!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+		<dependency>
+		    <groupId>xml-apis</groupId>
+		    <artifactId>xml-apis</artifactId>
+		    <version>2.0.2</version>
+		</dependency>		
+		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk16 -->
+		<dependency>
+		    <groupId>org.bouncycastle</groupId>
+		    <artifactId>bcprov-jdk16</artifactId>
+		    <version>1.40</version>
+		</dependency>
+		
+		
 	</dependencies>
 	<build>
 		<finalName>learn</finalName>
