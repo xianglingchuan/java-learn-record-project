@@ -48,7 +48,6 @@ public class UDPClientObject {
 			socket.send(packet);
 			System.out.println("*******I am is Client, send success.*******");
 			
-			
 			//接收服务端返回的响应内容
 			//System.out.println("port1:"+packet.getPort()+", port2:"+socket.getPort()+",port3:"+socket.getLocalPort());
 			//创建接收的pcket
@@ -68,7 +67,5 @@ public class UDPClientObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		
-		
 	}
 }

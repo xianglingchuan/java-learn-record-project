@@ -37,8 +37,7 @@ public class UDPServiceObject {
 			ObjectInputStream oStream =new ObjectInputStream(bInputStream);
 			User user =  (User) oStream.readObject();
 			System.out.println("client say username:"+user.getUsername()+", password:"+user.getPassword());
-			
-			
+					
 			//回复客户端对象
 			//组装回复的数据
 			ByteArrayOutputStream bOutputStream = new ByteArrayOutputStream();

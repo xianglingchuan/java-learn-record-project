@@ -8,7 +8,6 @@ public class Result implements Serializable {
 	
 	private String message;
 	
-	
 	public Result(int code, String message) {
 		super();
 		this.code = code;
@@ -30,8 +29,4 @@ public class Result implements Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-
-	
-
 }
