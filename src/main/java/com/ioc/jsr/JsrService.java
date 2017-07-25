@@ -1,0 +1,43 @@
+package com.ioc.jsr;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.stereotype.Service;
+
+//@Service
+@Named
+public class JsrService {
+	
+	
+	//@Resource
+	//@Inject
+	private JsrDao jsrDao;
+	
+	//@Resource
+	@Inject
+	public void setJsrDao(@Named("jsrDao") JsrDao jsrDao) {
+		this.jsrDao = jsrDao;
+	}
+
+
+	public void save(){
+		jsrDao.save();
+	}
+	
+	
+	@PostConstruct
+	public void init(){
+		System.out.println("JsrService init...");
+	}
+	
+	@PreDestroy
+	public void destory(){
+		System.out.println("JsrService destory...");
+	}
+	
+
+}
