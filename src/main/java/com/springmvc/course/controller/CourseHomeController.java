@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springmvc.course.bean.Course;
+import com.springmvc.course.bean.SysConf;
 import com.springmvc.course.service.CourseService;
 
 @Controller
@@ -27,6 +28,18 @@ public class CourseHomeController {
     		System.out.println("name:"+books.get(i).getTitle());
     	}
         return "springmvc/course/index";
-    }	
+    }
+    
+    
+    @RequestMapping(value="/view",method=RequestMethod.GET)
+    public String view(Model model){
+    	
+    	SysConf sysconf = new SysConf();
+    	System.out.println("development:"+sysconf.getTest());
+    	
+    	
+    	return "springmvc/course/index";
+    }
+    
 	
 }
