@@ -17,7 +17,6 @@ import com.google.gson.GsonBuilder;
 import com.gson.bean.User;
 import com.gson.bean.UserBirthday;
 
-import javafx.scene.chart.PieChart.Data;
 
 public class GsonReadFile {
 	

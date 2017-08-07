@@ -10,7 +10,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-import com.sun.media.jfxmedia.control.VideoDataBuffer;
 
 @Component
 @Aspect
