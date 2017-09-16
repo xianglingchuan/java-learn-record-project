@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-import com.sun.istack.FinalArrayList;
-
 public class ProducerServiceImpl implements ProducerService {
 
 	@Autowired

@@ -118,20 +118,20 @@
 	</bean>
 	
 	
-	<util:properties id="sys" location="classpath:sysConf.properties"/>  
+<!-- 	<util:properties id="sys" location="classpath:sysConf.properties"/>   -->
 	
 	
 	  <!-- 使用注解注入properties中的值 -->
-	  <bean id="config"
+<!-- 	  <bean id="config"
 	     class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 	    <property name="locations">
 	      <list>
 	        <value>classpath:sysConf.properties</value>
 	      </list>
 	    </property>
-	    <!-- 设置编码格式 -->
+	    设置编码格式
 	    <property name="fileEncoding" value="UTF-8"></property>
-	  </bean>
+	  </bean> -->
   	
 	
 	

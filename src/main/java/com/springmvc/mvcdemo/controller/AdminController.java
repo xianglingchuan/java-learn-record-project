@@ -12,9 +12,7 @@ public class AdminController {
 
 	
 	private static Logger log = Logger.getLogger(CourseController.class);
-	
-
-		
+			
 	
 	/*
 	 * 添加编辑课程表单方法
