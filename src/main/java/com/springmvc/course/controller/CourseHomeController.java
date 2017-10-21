@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.aop.aspectj.biz.AlanBiz;
 import com.springmvc.course.bean.Course;
 //import com.springmvc.course.bean.SysConf;
 import com.springmvc.course.service.CourseService;
@@ -33,6 +34,10 @@ public class CourseHomeController {
     
     @RequestMapping(value="/view",method=RequestMethod.GET)
     public String view(Model model){
+    	
+    	
+    	AlanBiz alanBiz = new AlanBiz();
+		alanBiz.save("this is test");
     	
 //    	SysConf sysconf = new SysConf();
 //    	System.out.println("development:"+sysconf.getTest());
