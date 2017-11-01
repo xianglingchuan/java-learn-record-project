@@ -5,12 +5,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+
+import com.message.bean.Command;
+
+//import org.apache.ibatis.session.SqlSession;
 
 import com.message.bean.Message;
 import com.message.util.DBMybatisUtil;
 import com.message.util.DBUtil;
+
+
+//import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
+
 
 public class MessageDao {
 
@@ -60,7 +69,10 @@ public class MessageDao {
 		try {
 			DBMybatisUtil dbMybatisUtil = new DBMybatisUtil();
 			sqlSession = dbMybatisUtil.getSqlSession();
-			list = sqlSession.selectList("Message.queryList",message);
+			//list = sqlSession.selectList("Message.queryList",message);
+			IMessage iMessage = sqlSession.getMapper(IMessage.class);
+			list = iMessage.queryList(message);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {
@@ -178,6 +190,31 @@ public class MessageDao {
 	
 	
 	/**
+	 * 根据查询条件查询消息列表的条数
+	 */
+	public int count(Message entity) {
+		SqlSession sqlSession = null;
+		int result = 0;
+		try {
+			DBMybatisUtil dbMybatisUtil = new DBMybatisUtil();
+			sqlSession = dbMybatisUtil.getSqlSession();
+			result = sqlSession.selectOne("Message.count", entity);
+			sqlSession.commit();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}	
+	
+	
+	
+	
+	
+	/**
 	 * 通过MyBatis查询数据列表 
 	 * */
 	public List<Message> queryListByTrim(Message message){
@@ -235,6 +272,34 @@ public class MessageDao {
 		return result;
 	}	
 	
+	
+	
+	/**
+	 * 通过MyBatis查询数据列表 
+	 * */
+//	public List<Message> queryListPage(Map map){
+//		System.out.println("queryListPage......");
+//		SqlSession sqlSession = null;
+//		List<Message> list = new ArrayList<Message>();
+//		try {
+//			DBMybatisUtil dbMybatisUtil = new DBMybatisUtil();
+//			sqlSession = dbMybatisUtil.getSqlSession();
+//			Command command = new Command();
+//			list = sqlSession.selectList("Message.queryListPage",command);
+//			//IMessage iMessage = sqlSession.getMapper(IMessage.class);
+//			//list = iMessage.queryListPage(map);
+//			
+//			System.out.println("list.size:"+list.size());
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}finally {
+//			if(sqlSession!=null){
+//				sqlSession.close();
+//			}
+//		}		
+//		return list;
+//	}	
 	
 	
 }

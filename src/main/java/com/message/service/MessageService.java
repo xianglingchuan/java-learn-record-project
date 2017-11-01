@@ -2,9 +2,11 @@ package com.message.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.message.bean.Message;
 import com.message.dao.MessageDao;
+import com.message.entity.Page;
 
 public class MessageService {
 
@@ -61,4 +63,17 @@ public class MessageService {
 	public int insertByTrim(Message entity){
 		return messageDao.insertByTrim(entity);
 	}
+	
+	
+//	//查询并分页
+//	public List<Message> queryListPage(Map map){
+//		//获取总记录数
+//		//int total = messageDao.count((Message)map.get("message"));
+//		//Page page = (Page)map.get("page");
+//		//page.setTotalNumber(10);
+//		//System.out.println(page.toString());
+//		return messageDao.queryListPage(map);
+//	}	
+	
+	
 }

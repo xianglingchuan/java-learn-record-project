@@ -22,7 +22,7 @@ public class CreateServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		Message info = new Message();
 		req.setAttribute("info", info);
-		req.getRequestDispatcher("WEB-INF/view/message/backend/form.jsp").forward(req, resp);
+		req.getRequestDispatcher("WEB-INF/views/message/backend/form.jsp").forward(req, resp);
 	}
 	
 

@@ -35,7 +35,7 @@ public class EditServlet extends HttpServlet {
 			System.out.println("参数错误!");
 		}
 		req.setAttribute("info", info);
-		req.getRequestDispatcher("WEB-INF/view/message/backend/form.jsp").forward(req, resp);		
+		req.getRequestDispatcher("WEB-INF/views/message/backend/form.jsp").forward(req, resp);		
 	}
 
 	@Override
