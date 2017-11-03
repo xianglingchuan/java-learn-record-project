@@ -3,6 +3,8 @@ package com.message.util;
 import java.io.IOException;
 import java.io.Reader;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,6 +13,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class DBMybatisUtil {
 
+	@Resource
+	private SqlSessionFactory sqlSessionFactory;	
+	
 	
 	public SqlSession getSqlSession() throws IOException {
 		// 通过配置文件获取数据库连接信息
@@ -22,11 +27,21 @@ public class DBMybatisUtil {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		//InputStream is = classloader.getResourceAsStream("Configuration.xml");
 		reader = Resources.getResourceAsReader(classloader, "mybatis/Configuration.xml");
+		//reader = Resources.getResourceAsReader(classloader, "springmvc/applicationContext.xml");
 		
 		// 通过配置信息构建一个SqlSessionFactory
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		// 通过SqlSessionFactory打开一个数据库会话
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		return sqlSession;
+		
+//		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+//		SqlSessionFactory sessionFactory2 = factoryBean.getObject();
+//		System.out.println("sessionFactory2:"+sessionFactory2.toString());
+//		
+//		
+//		SqlSession sqlSession = sessionFactory2.openSession();
+//		return sqlSession;
+		
 	}
 }

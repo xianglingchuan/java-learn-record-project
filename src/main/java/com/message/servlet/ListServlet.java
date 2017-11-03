@@ -55,15 +55,17 @@ public class ListServlet extends HttpServlet {
 		
 		//查询列表内容
 		//List<Message> list = messageService.getList(messageFind);
-		List<Message> list = messageService.queryList(messageFind);
+		//List<Message> list = messageService.queryList(messageFind);
 		
 		
 		//进行分页查询
-		//List<Message> list = messageService.queryListPage(paramObject);
+		List<Message> list = messageService.queryListPage(paramObject);
 		
 		
 		System.out.println("ListServlet.java");
 		req.setAttribute("messageList", list);
+		req.setAttribute("page", page);
+		
 		req.getRequestDispatcher("WEB-INF/views/message/backend/list.jsp").forward(req, resp);
 	}
 

@@ -2,7 +2,11 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 普通的配置方式, -->
+<!-- <mapper namespace="Message"> -->
+<!-- 反射的配置方式,直接反射到指定的类里面 -->
 <mapper namespace="com.message.dao.IMessage">
+
 	<resultMap type="com.message.bean.Message" id="MessageResult">
 		<id column="ID" jdbcType="INTEGER" property="id" />
 		<result column="COMMAND" jdbcType="VARCHAR" property="command" />
@@ -42,7 +46,8 @@
 	</delete>
 
 
-	<select id="get" parameterType="com.message.bean.Message" resultMap="MessageResult">
+	<select id="get" parameterType="com.message.bean.Message"
+		resultMap="MessageResult">
 		SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message WHERE 1=1
 		<if test="id!=null">
 			AND ID=#{id}
@@ -58,38 +63,32 @@
 	<update id="update" parameterType="com.message.bean.Message">
 		update message
 		set COMMAND = #{command,jdbcType=VARCHAR},
-		DESCRIPTION = #{description,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{description,jdbcType=VARCHAR},
 		CONTENT = #{content,jdbcType=VARCHAR}
 		where 1=1
 		<if test="id != null">
 			AND id = #{id,jdbcType=INTEGER}
 		</if>
 	</update>
-	
-	<!--  
-	trim 属性
-	  prefix：前缀覆盖并增加其内容
-	  suffix：后缀覆盖并增加其内容
-	  prefixOverrides：前缀判断的条件
-	  suffixOverrides：后缀判断的条件
-	trim元素的主要功能是可以在自己包含的内容钱加上某些前缀，也可以在其后加上某写后缀，与之对应的属性是prefix和suffix；
-	可以把包含内容的首部某些内容覆盖，即忽略，也可以把尾部的某些内容覆盖，对应的属性是prefixOverrides和suffixOverrides。
-	-->	
-	
-	 <!-- 
-	 请注意这里的${command}的使用方法， order by ${command}
-	 -->
-	  <select id="queryListByTrim" parameterType="com.message.bean.Message" resultMap="MessageResult">    
-	    select * from message
-	    <trim prefix="WHERE" prefixOverrides="AND|OR"> 
-	       <if test="description != null"> AND DESCRIPTION=#{description} </if> 
-	       <if test="command != null"> AND COMMAND=#{command} </if> 
-	    </trim>
-	    order by ${command}
-	  </select>
-	  <!-- select * from message WHERE COMMAND=?  -->
-	
-	
+
+	<!-- trim 属性 prefix：前缀覆盖并增加其内容 suffix：后缀覆盖并增加其内容 prefixOverrides：前缀判断的条件 
+		suffixOverrides：后缀判断的条件 trim元素的主要功能是可以在自己包含的内容钱加上某些前缀，也可以在其后加上某写后缀，与之对应的属性是prefix和suffix； 
+		可以把包含内容的首部某些内容覆盖，即忽略，也可以把尾部的某些内容覆盖，对应的属性是prefixOverrides和suffixOverrides。 -->
+
+	<!-- 请注意这里的${command}的使用方法， order by ${command} -->
+	<select id="queryListByTrim" parameterType="com.message.bean.Message"
+		resultMap="MessageResult">
+		select * from message
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="description != null"> AND DESCRIPTION=#{description} </if>
+			<if test="command != null"> AND COMMAND=#{command} </if>
+		</trim>
+		order by ${command}
+	</select>
+	<!-- select * from message WHERE COMMAND=? -->
+
+
 	<update id="updateByTrim" parameterType="com.message.bean.Message">
 		update message
 		<trim prefix="set" suffixOverrides="," suffix="where id = #{id} ">
@@ -97,25 +96,57 @@
 			<if test="command != null and command.length()>0">COMMAND = #{command,jdbcType=VARCHAR},</if>
 		</trim>
 	</update>
-	<!-- update message set COMMAND = ? where id = ?  -->
-	
-	
-	
+	<!-- update message set COMMAND = ? where id = ? -->
+
+
+
 	<!-- 自动获取已自增长的ID号，将自增长ID号存入com.message.bean.Message对象的id属性中 -->
-	<insert id="insertByTrim" useGeneratedKeys="true" keyProperty="id" parameterType="com.message.bean.Message">
-        INSERT INTO message 
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            ID,
-            <if test="command != null">COMMAND,</if>
-            <if test="description != null">DESCRIPTION,</if>
-            <if test="content != null">CONTENT,</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            null,
-            <if test="command != null">#{command,jdbcType=VARCHAR},</if>
-            <if test="description != null">#{description,jdbcType=VARCHAR},</if>
-            <if test="content != null">#{content,jdbcType=VARCHAR},</if>
-        </trim>
-    </insert>
-    <!-- INSERT INTO message ( ID, COMMAND, DESCRIPTION, CONTENT ) values ( null, ?, ?, ? ) -->
+	<insert id="insertByTrim" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.message.bean.Message">
+		INSERT INTO message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			ID,
+			<if test="command != null">COMMAND,</if>
+			<if test="description != null">DESCRIPTION,</if>
+			<if test="content != null">CONTENT,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			null,
+			<if test="command != null">#{command,jdbcType=VARCHAR},</if>
+			<if test="description != null">#{description,jdbcType=VARCHAR},</if>
+			<if test="content != null">#{content,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	<!-- INSERT INTO message ( ID, COMMAND, DESCRIPTION, CONTENT ) values ( 
+		null, ?, ?, ? ) -->
+
+
+	<select id="count" parameterType="com.message.bean.Message"
+		resultType="int">
+		select count(*) from message
+		<where>
+			<if test="command != null and !&quot;&quot;.equals(command.trim())">
+				and COMMAND=#{command}
+			</if>
+			<if
+				test="description != null and !&quot;&quot;.equals(description.trim())">
+				and DESCRIPTION like '%' #{description} '%'
+			</if>
+		</where>
+	</select>
+
+	<select id="queryListPage" parameterType="java.util.Map"
+		resultMap="MessageResult">
+		SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message WHERE 1=1
+		<if
+			test="message.command!=null and !&quot;&quot;.equals(message.command.trim())">
+			AND COMMAND=#{message.command}
+		</if>
+		<if
+			test="message.description!=null and !&quot;&quot;.equals(message.description.trim())">
+			AND DESCRIPTION LIKE '%' #{message.description} '%'
+		</if>
+		ORDER BY ID DESC LIMIT #{page.dbIndex}, #{page.dbNumber}
+	</select>
+
 </mapper>

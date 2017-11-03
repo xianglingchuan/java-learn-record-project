@@ -115,4 +115,10 @@ public class Page {
 		this.dbNumber = dbNumber;
 	}
 
+	@Override
+	public String toString() {
+		return "Page [totalNumber=" + totalNumber + ", currentPage=" + currentPage + ", totalPage=" + totalPage
+				+ ", pageNumber=" + pageNumber + ", dbIndex=" + dbIndex + ", dbNumber=" + dbNumber + "]";
+	}
+
 }

@@ -265,7 +265,7 @@
 		    <artifactId>spring-jms</artifactId>
 		    <version>4.3.0.RELEASE</version>
 		</dependency> -->
-<!-- 		<dependency>
+        <!--<dependency>
 		    <groupId>org.apache.activemq</groupId>
 		    <artifactId>activemq-core</artifactId>
 		    <version>5.7.0</version>

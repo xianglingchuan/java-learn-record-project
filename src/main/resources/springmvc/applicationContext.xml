@@ -105,6 +105,8 @@
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="multipleDataSource" />
+		
+		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
 		<!-- 自动扫描mapping.xml文件 -->
 		<property name="mapperLocations" value="classpath:mappings/**/*.xml"></property>
 		<!-- 就算不引入mybatis-config文件也可以正常启动程序了 -->
@@ -117,7 +119,10 @@
 		<property name="basePackage" value="com.springmvc/**/dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-	
+		
+	<!--配置全局异常类-->
+    <bean id="exceptionResolver" class="com.exeception.MyExceptionResolver"/>
+
 	
 <!-- 	<util:properties id="sys" location="classpath:sysConf.properties"/>   -->
 	

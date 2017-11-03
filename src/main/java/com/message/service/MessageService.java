@@ -1,6 +1,5 @@
 package com.message.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -65,15 +64,17 @@ public class MessageService {
 	}
 	
 	
-//	//查询并分页
-//	public List<Message> queryListPage(Map map){
-//		//获取总记录数
-//		//int total = messageDao.count((Message)map.get("message"));
-//		//Page page = (Page)map.get("page");
-//		//page.setTotalNumber(10);
-//		//System.out.println(page.toString());
-//		return messageDao.queryListPage(map);
-//	}	
+	//查询并分页
+	public List<Message> queryListPage(Map map){
+		//获取总记录数
+		int total = messageDao.count((Message)map.get("message"));
+		System.out.println("total:"+total);
+		Page page = (Page)map.get("page");
+		page.setTotalNumber(total);
+		page.count();
+		System.out.println(page.toString());
+		return messageDao.queryListPage(map);
+	}	
 	
 	
 }
