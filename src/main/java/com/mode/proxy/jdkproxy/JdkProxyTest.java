@@ -19,7 +19,8 @@ public class JdkProxyTest {
 		 * loader 类加载器
 		 * interfaces 实现接口
 		 * h InvocationHandler
-		 * */
+		 * 
+		 */
 		Moveable moveable = (Moveable) Proxy.newProxyInstance(loader.getClassLoader(), loader.getInterfaces(), h);
 		//moveable.move();
 		
