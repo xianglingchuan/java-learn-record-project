@@ -31,5 +31,8 @@ public interface IMessage {
 	public int updateByTrim(Message entity);
 
 	public int insertByTrim(Message entity);
-
+	
+	
+	//获取列表并分页-利用拦截器处理
+	public List<Message> queryMessageListByPage(Map map);
 }

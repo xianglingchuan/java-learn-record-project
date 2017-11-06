@@ -77,6 +77,15 @@
     </select> 
     
     	
+    <!-- 批量插入语句 -->	
+	<insert id="insertBatch" parameterType="java.util.List">
+		INSERT INTO command_content(CONTENT,COMMAND_ID) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.content},#{item.commandId})
+		</foreach>
+	</insert>   	
+   	
+   	
 	
 	
 		

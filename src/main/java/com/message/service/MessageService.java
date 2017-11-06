@@ -77,4 +77,16 @@ public class MessageService {
 	}	
 	
 	
+	//查询并分页 - 利用拦截器分页
+	public List<Message> queryMessageListByPage(Map map){
+		//获取总记录数
+		int total = messageDao.count((Message)map.get("message"));
+		System.out.println("total:"+total);
+		Page page = (Page)map.get("page");
+		page.setTotalNumber(total);
+		page.count();
+		System.out.println(page.toString());
+		return messageDao.queryMessageListByPage(map);
+	}	
+	
 }

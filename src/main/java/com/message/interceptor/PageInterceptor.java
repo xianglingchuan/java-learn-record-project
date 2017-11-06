@@ -20,6 +20,8 @@ import org.apache.ibatis.reflection.SystemMetaObject;
 
 import com.message.entity.Page;
 
+import org.xml.sax.SAXParseException;
+
 /**
  * 分页拦截器 
  * 
@@ -33,6 +35,7 @@ public class PageInterceptor implements Interceptor {
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		
+		System.out.println("******查询语句进入了分页拦截器******");
 		StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
 		
 		MetaObject metaObject= SystemMetaObject.forObject(statementHandler);

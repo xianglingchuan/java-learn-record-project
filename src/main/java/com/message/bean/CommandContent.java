@@ -52,6 +52,14 @@ public class CommandContent {
 
 	public void setCommand(Command command) {
 		this.command = command;
+	}
+
+	@Override
+	public String toString() {
+		return "CommandContent [id=" + id + ", content=" + content + ", commandId=" + commandId + ", command=" + command
+				+ "]";
 	}	
+	
+	
 
 }

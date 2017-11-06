@@ -33,5 +33,9 @@ public class CommandContentService {
 		return commandContentDao.findInfoByOneParam(entity);
 	}	
 	
+	//批量插入数据
+	public Integer insertBatch(List<CommandContent> entitys){
+		return commandContentDao.insertBatch(entitys);
+	}	
 	
 }

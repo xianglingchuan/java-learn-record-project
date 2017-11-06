@@ -321,4 +321,32 @@ public class MessageDao{
 	}	
 	
 	
+	/**
+	 * 通过MyBatis查询数据列表 
+	 * */
+	public List<Message> queryMessageListByPage(Map map){
+		System.out.println("queryListPage......");
+		SqlSession sqlSession = null;
+		List<Message> list = new ArrayList<Message>();
+		try {
+			DBMybatisUtil dbMybatisUtil = new DBMybatisUtil();
+			sqlSession = dbMybatisUtil.getSqlSession();
+			Command command = new Command();
+			//list = sqlSession.selectList("Message.queryListPage",command);
+			IMessage iMessage = sqlSession.getMapper(IMessage.class);
+			list = iMessage.queryMessageListByPage(map);
+			//System.out.println("list.size:"+list.size());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(sqlSession!=null){
+				sqlSession.close();
+			}
+		}		
+		return list;
+	}	
+	
+	
+	
+	
 }

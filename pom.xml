@@ -296,7 +296,12 @@
 		</dependency>
 		<!-- start memcached -->
 		
-
+        <!-- Cglib动态代理使用类 -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib-nodep</artifactId>
+		    <version>3.1</version>
+		</dependency>
 
 		
 		

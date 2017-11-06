@@ -94,7 +94,24 @@ public class CommandContentDao {
 	}
 	
 	
-	
+	//批量插入数据
+	public Integer insertBatch(List<CommandContent> entitys){
+		SqlSession sqlSession = null;
+		int result = 0;
+		try {
+			DBMybatisUtil dbMybatisUtil = new DBMybatisUtil();
+			sqlSession = dbMybatisUtil.getSqlSession();
+			result = sqlSession.insert("CommandContent.insertBatch", entitys);
+			sqlSession.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(sqlSession!=null){
+				sqlSession.close();
+			}
+		}		
+		return result;
+	}
 	
 	
 }

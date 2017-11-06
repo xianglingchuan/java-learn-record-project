@@ -148,5 +148,20 @@
 		</if>
 		ORDER BY ID DESC LIMIT #{page.dbIndex}, #{page.dbNumber}
 	</select>
+	
+	  <!-- 定义分页拦截器SQL查询语句 -->
+	  <select id="queryMessageListByPage" parameterType="java.util.Map" resultMap="MessageResult">
+	    select ID,COMMAND,DESCRIPTION,CONTENT from message
+	    <where>
+	    	<if test="message.command != null and !&quot;&quot;.equals(message.command.trim())">
+		    	and COMMAND=#{message.command}
+		    </if>
+		    <if test="message.description != null and !&quot;&quot;.equals(message.description.trim())">
+		    	and DESCRIPTION like '%' #{message.description} '%'
+		    </if>
+	    </where>
+	    order by ID
+	  </select>
+
 
 </mapper>

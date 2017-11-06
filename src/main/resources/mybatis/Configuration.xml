@@ -24,11 +24,8 @@
 		<mapper resource="mappings/message/Command.xml" />
 		<mapper resource="mappings/message/CommandContent.xml" />
 	</mappers>
-	
-	
-	
-	
-<!-- 	<plugins>
-		<plugin interceptor="com.message.interceptor.PageInterceptor"/>
-	</plugins> -->
+<!-- 		<plugin interceptor="com.message.interceptor.PageInterceptor">
+			<property name="test" value="abc" />
+		</plugin> -->
+<!-- 	</plugins> -->
 </configuration>

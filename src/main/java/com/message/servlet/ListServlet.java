@@ -1,6 +1,7 @@
 package com.message.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.message.bean.CommandContent;
 import com.message.bean.Message;
 import com.message.entity.Page;
+import com.message.service.CommandContentService;
 import com.message.service.MessageService;
 
 /**
@@ -61,14 +64,42 @@ public class ListServlet extends HttpServlet {
 		//进行分页查询
 		List<Message> list = messageService.queryListPage(paramObject);
 		
+		//分页使用拦截器查询
+		//List<Message> list = messageService.queryMessageListByPage(paramObject);
+		
 		
 		System.out.println("ListServlet.java");
 		req.setAttribute("messageList", list);
 		req.setAttribute("page", page);
 		
+		
+		
+		
+		//测试批量插入数据
+		CommandContentService service = new CommandContentService();
+		CommandContent content1 = new CommandContent();
+		content1.setCommandId(1);
+		content1.setContent("aaa");
+		System.out.println(content1.toString());
+		CommandContent content2 = new CommandContent();
+		content2.setCommandId(1);
+		content2.setContent("bbb");	
+		System.out.println(content2.toString());
+		List<CommandContent> list2 = new ArrayList<CommandContent>();
+		list2.add(content1);
+		list2.add(content2);
+		service.insertBatch(list2);
+		
+		
+		
+		
+		
+		
 		req.getRequestDispatcher("WEB-INF/views/message/backend/list.jsp").forward(req, resp);
 	}
 
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		this.doGet(req, resp);
