@@ -10,10 +10,10 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 
-public class Proxy {
+public class ProxyTwo {
 
 	
-	public static Object newProxyInstance(Class infce) throws Exception{
+	public static Object newProxyInstance(Class infce, InvocationHandler h) throws Exception{
 		
 		//定义一个换行符
 		String rt = "\r\n";
@@ -24,23 +24,28 @@ public class Proxy {
 			String methodName = method.getName();
 			methodStr =
 			"	@Override"+rt+
-			"	public void "+methodName+"() {"+rt+
-			"		long startTime = System.currentTimeMillis();"+rt+
-			"		System.out.println(\"--记录开始时间......\"+startTime);"+rt+
-			"		moveable."+methodName+"();"+rt+
-			"		long endTime = System.currentTimeMillis();"+rt+
-			"		System.out.println(\"--记录结束时间......运行时间为:\"+ (endTime - startTime) + \"毫秒\");"+rt+
-			"	}";		
+			"public void "+methodName+"() {"+rt+
+		
+				//使用反射功能调用现实类的方法
+				"try{"+rt+
+				"	Method md = "+infce.getName()+".class.getMethod(\""+methodName+"\");"+rt+
+				"	h.invoke(this, md);"+rt+	
+				"}catch(Exception e){e.printStackTrace();}"+rt+
+			
+			"}";	
 		}	
-	
+		
+		
 		
 		//将时间代理类的代理直接复制进入
 		String str =
 		"package com.mode.analogjdkproxy.proxy;"+rt+
+		"import java.lang.reflect.Method;" + rt +
+		"import com.mode.analogjdkproxy.proxy.InvocationHandler;" +  rt+		
 		"public class $Proxy0 implements "+iClassName+"{"+rt+
-		"	private "+iClassName+" moveable;"+rt+
-		"	public $Proxy0(DTrainMoveable moveable) {"+rt+
-		"		this.moveable = moveable;"+rt+
+		"	private InvocationHandler h;"+rt+
+		"	public $Proxy0(InvocationHandler h) {"+rt+
+		"		this.h = h;"+rt+
 		"	}"+rt+methodStr+
 		"}";
 		
@@ -68,7 +73,7 @@ public class Proxy {
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 		Class c =  classLoader.loadClass("com.mode.analogjdkproxy.proxy.$Proxy0");
 		
-		Constructor constructor = c.getConstructor(infce);
-		return constructor.newInstance(new DTrain());
+		Constructor constructor = c.getConstructor(InvocationHandler.class);
+		return constructor.newInstance(h);
 	}
 }

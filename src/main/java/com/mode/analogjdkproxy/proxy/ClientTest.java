@@ -13,8 +13,18 @@ public class ClientTest {
 		
 		//模拟JDK动态代理类测试
 		try {
-			DTrainMoveable moveable =  (DTrainMoveable) Proxy.newProxyInstance(DTrainMoveable.class);
+			//第一版，代理类写在Proxy内
+			//DTrainMoveable moveable =  (DTrainMoveable) Proxy.newProxyInstance(DTrainMoveable.class);
+			//moveable.move();
+			
+			
+			//第二版，代理类由外部传入
+			DTrain car = new DTrain();
+			LogHandler h = new LogHandler(car);
+			DTrainMoveable moveable =  (DTrainMoveable) ProxyTwo.newProxyInstance(DTrainMoveable.class,h);
 			moveable.move();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
